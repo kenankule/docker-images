@@ -1,0 +1,13 @@
+# Set current user in nss_wrapper
+PASSWD_DIR="/opt/app-root/etc"
+
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+cat /etc/passwd > ${PASSWD_DIR}/passwd.template
+echo 'default:x:${USER_ID}:${GROUP_ID}:Default Application User:${HOME}:/sbin/nologin' >> ${PASSWD_DIR}/passwd.template
+envsubst < ${PASSWD_DIR}/passwd.template > ${PASSWD_DIR}/passwd
+export LD_PRELOAD=libnss_wrapper.so
+export NSS_WRAPPER_PASSWD=${PASSWD_DIR}/passwd
+export NSS_WRAPPER_GROUP=/etc/group
+
+exec sqlplus -v "$@"
