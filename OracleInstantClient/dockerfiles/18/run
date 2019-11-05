@@ -10,4 +10,4 @@ export LD_PRELOAD=libnss_wrapper.so
 export NSS_WRAPPER_PASSWD=${PASSWD_DIR}/passwd
 export NSS_WRAPPER_GROUP=/etc/group
 
-exec sqlplus -v "$@"
+exec sqlplus "$@"
