@@ -24,7 +24,8 @@ RUN yum -y install oracle-release-el7 && yum-config-manager --enable ol7_oracle_
         oracle-instantclient${release}.${update}-basic \
         oracle-instantclient${release}.${update}-devel \
         oracle-instantclient${release}.${update}-sqlplus \
-        nss_wrapper && \
+        nss_wrapper \
+        gettext && \
     rm -rf /var/cache/yum && \
     mkdir -p /opt/app-root/etc && \
     chgrp -R 0 /opt/app-root/etc && \
